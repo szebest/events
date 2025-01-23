@@ -2,7 +2,7 @@ import { Navigate } from "react-router";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // layouts
-import { DefaultLayout } from "./layout/containers";
+import { DefaultLayout } from "@layout/containers";
 
 export function App() {
   return (
