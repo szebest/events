@@ -1,6 +1,9 @@
 import { Suspense } from "react";
-import { ErrorBoundary } from "react-error-boundary";
 import { Outlet } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
+import { Box, CircularProgress } from "@mui/material";
+
+import { Header } from "@/layout/components";
 
 export type DefaultLayoutProps = {
   maxWidth?: string;
@@ -9,21 +12,31 @@ export type DefaultLayoutProps = {
 export function DefaultLayout({ maxWidth = "1920px" }: DefaultLayoutProps) {
   return (
     <>
-      {/* TODO: Add header */}
+      <Header />
       <main>
-        <div>
-          <div style={{ maxWidth }}>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box sx={{ maxWidth, width: "100%" }} px={4} py={2}>
             <ErrorBoundary
-              fallback={<div>There was an error while loading the page</div>}
+              fallback={<Box>There was an error while loading the page</Box>}
             >
               <Suspense
-                fallback={<div style={{ width: "100%" }}>Loading...</div>}
+                fallback={
+                  <Box
+                    sx={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <CircularProgress />
+                  </Box>
+                }
               >
                 <Outlet />
               </Suspense>
             </ErrorBoundary>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </main>
     </>
   );
