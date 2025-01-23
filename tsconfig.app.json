@@ -23,8 +23,9 @@
     "noUncheckedSideEffectImports": true,
 
     "paths": {
-      "@layout/*": ["./src/layout/*"],
-      "@features/*": ["./src/features/*"]
+      "@/layout/*": ["./src/layout/*"],
+      "@/features/*": ["./src/features/*"],
+      "@/shared/*": ["./src/shared/*"]
     }
   },
   "include": ["src"]
