@@ -19,7 +19,7 @@ export type EventsListTableProps = {
 export function EventsListTable({ plannedEvents }: EventsListTableProps) {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table aria-label="planned events table">
         <TableHead>
           <TableRow>
             <TableCell width="30%">Title</TableCell>
@@ -38,9 +38,7 @@ export function EventsListTable({ plannedEvents }: EventsListTableProps) {
               key={plannedEvent.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
-                {plannedEvent.title}
-              </TableCell>
+              <TableCell>{plannedEvent.title}</TableCell>
               <TableCell align="right">
                 {plannedEvent.date.toString()}
               </TableCell>
