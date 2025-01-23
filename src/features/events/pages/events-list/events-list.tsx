@@ -3,11 +3,7 @@ import { Box } from "@mui/material";
 
 import { useAppDispatch, useAppSelector } from "@/shared/hooks";
 
-import {
-  fetchEvents,
-  selectAllEvents,
-  selectEventsStatus,
-} from "../../slices/events-list";
+import { fetchEvents, selectAllEvents, selectEventsStatus } from "../../slices";
 import { EventsListTable } from "../../components";
 
 export function EventsListPage() {

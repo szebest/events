@@ -28,7 +28,7 @@ const initialState: EventsState = {
 };
 
 const eventsSlice = createSlice({
-  name: "posts",
+  name: "events",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -47,9 +47,12 @@ const eventsSlice = createSlice({
   },
 });
 
-export default eventsSlice.reducer;
+export const eventsReducer = eventsSlice.reducer;
 
 export const selectAllEvents = (state: RootState) => state.events.events;
+
+export const selectEventById = (state: RootState, eventId: number) =>
+  state.events.events.find((event) => event.id === eventId);
 
 export const selectEventsStatus = (state: RootState) => state.events.status;
 

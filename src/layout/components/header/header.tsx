@@ -1,12 +1,20 @@
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { AppBar, Link, Toolbar, Typography } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 
 export function Header() {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Planned events
-        </Typography>
+        <Link
+          component={RouterLink}
+          to="/events"
+          underline="none"
+          color="white"
+        >
+          <Typography variant="h6" component="div">
+            Planned events
+          </Typography>
+        </Link>
       </Toolbar>
     </AppBar>
   );

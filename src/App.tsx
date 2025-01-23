@@ -7,10 +7,17 @@ import store from "@/shared/store";
 
 // layouts
 import { DefaultLayout } from "@/layout/containers";
+import { NumberParamContainer } from "./shared/components";
 
 const EventsListPage = lazy(() =>
   import("@/features/events").then((module) => ({
     default: module.EventsListPage,
+  }))
+);
+
+const EventsDetailsPage = lazy(() =>
+  import("@/features/events").then((module) => ({
+    default: module.EventsDetailsPage,
   }))
 );
 
@@ -21,7 +28,14 @@ export function App() {
         <Routes>
           <Route path="/events" element={<DefaultLayout />}>
             <Route path="" element={<EventsListPage />}></Route>
-            <Route path=":eventId" element={<div>event</div>}></Route>
+            <Route
+              path=":eventId"
+              element={
+                <NumberParamContainer paramName="eventId">
+                  <EventsDetailsPage />
+                </NumberParamContainer>
+              }
+            ></Route>
             <Route path="add" element={<div>add</div>}></Route>
           </Route>
 

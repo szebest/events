@@ -46,7 +46,11 @@ export function EventsListTable({ plannedEvents }: EventsListTableProps) {
               </TableCell>
               <TableCell align="right">{plannedEvent.type.name}</TableCell>
               <TableCell align="center">
-                <Link component={RouterLink} to={`/events/${plannedEvent.id}`}>
+                <Link
+                  component={RouterLink}
+                  to={`/events/${plannedEvent.id}`}
+                  underline="none"
+                >
                   Details
                 </Link>
               </TableCell>

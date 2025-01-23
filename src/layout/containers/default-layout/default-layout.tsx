@@ -1,9 +1,10 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
-import { Box, CircularProgress } from "@mui/material";
+import { Box } from "@mui/material";
 
 import { Header } from "@/layout/components";
+import { LoadingIndicator } from "@/shared/components";
 
 export type DefaultLayoutProps = {
   maxWidth?: string;
@@ -19,19 +20,7 @@ export function DefaultLayout({ maxWidth = "1920px" }: DefaultLayoutProps) {
             <ErrorBoundary
               fallback={<Box>There was an error while loading the page</Box>}
             >
-              <Suspense
-                fallback={
-                  <Box
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <CircularProgress />
-                  </Box>
-                }
-              >
+              <Suspense fallback={<LoadingIndicator />}>
                 <Outlet />
               </Suspense>
             </ErrorBoundary>
