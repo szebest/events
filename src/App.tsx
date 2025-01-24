@@ -14,19 +14,19 @@ import { NumberParamContainer } from "./shared/components";
 
 // lazy loaded pages
 const EventsListPage = lazy(() =>
-  import("@/features/events").then((module) => ({
+  import("@/features/events/pages/events-list").then((module) => ({
     default: module.EventsListPage,
   }))
 );
 
 const EventsDetailsPage = lazy(() =>
-  import("@/features/events").then((module) => ({
+  import("@/features/events/pages/event-details").then((module) => ({
     default: module.EventsDetailsPage,
   }))
 );
 
 const AddEventPage = lazy(() =>
-  import("@/features/events").then((module) => ({
+  import("@/features/events/pages/add-event").then((module) => ({
     default: module.AddEventPage,
   }))
 );
