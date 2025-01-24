@@ -23,8 +23,8 @@ import { EVENT_TYPES } from "../../mock";
 
 export type AddEventFormProps = {
   onSubmit?: (_: AddPlannedEventRequest) => void;
-  loading: boolean;
-  error: string | null;
+  loading?: boolean;
+  error?: string | null;
 };
 
 export function AddEventForm({ onSubmit, loading, error }: AddEventFormProps) {
@@ -172,7 +172,7 @@ export function AddEventForm({ onSubmit, loading, error }: AddEventFormProps) {
                 label="Type of event"
                 id="eventTypeId"
                 name="eventTypeId"
-                value={formik.values.eventTypeId}
+                value={formik.values.eventTypeId ?? ""}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 error={
