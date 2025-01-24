@@ -1,50 +1,100 @@
-# React + TypeScript + Vite
+# Planned Events Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is designed to display planned events, allowing users to view upcoming events and add new ones. Events include details such as title, date and time, description, image, type, contact information, and location.
 
-Currently, two official plugins are available:
+## Scripts
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The application includes the following scripts for development, building, testing, and linting:
 
-## Expanding the ESLint configuration
+- `dev`: Starts the development server using Vite.
+- `build`: Compiles TypeScript files and builds the project for production.
+- `lint`: Lints the codebase using ESLint.
+- `preview`: Serves the production build locally for preview.
+- `test`: Runs unit tests using Vitest.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Getting Started
 
-- Configure the top-level `parserOptions` property like this:
+Follow these steps to build, run, and test the application locally:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Installation
+
+1. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+### Development
+
+To start the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Open your browser and navigate to the provided local server URL (e.g., `http://localhost:5173`).
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Building for Production
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+To build the application:
+
+```bash
+npm run build
+# or
+yarn build
 ```
+
+The production-ready files will be available in the `dist` folder.
+
+### Preview Production Build
+
+To serve the production build locally:
+
+```bash
+npm run preview
+# or
+yarn preview
+```
+
+### Linting
+
+To lint the codebase:
+
+```bash
+npm run lint
+# or
+yarn lint
+```
+
+### Testing
+
+To run unit tests:
+
+```bash
+npm run test
+# or
+yarn test
+```
+
+### Adding a New Event
+
+To add a new event, use the provided form in the application interface. Fill in the following details:
+
+- **Title**: A short, descriptive title of the event.
+- **Date and Time**: The date and time of the event in ISO 8601 format.
+- **Description**: A detailed description of the event.
+- **Image URL**: A URL pointing to an image representing the event.
+- **Event Type**: A category for the event.
+- **Contact Phone**: A phone number for event-related inquiries.
+- **Contact Email**: An email address for event-related inquiries.
+- **Event Location**: The location where the event will take place.
+
+Once submitted, the new event will appear in the list of planned events.
+
+---
+
+For further assistance or to report issues, please contact the project maintainers.
+
