@@ -47,7 +47,10 @@ const eventDetailsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchEventById.pending, (state) => {
+      .addCase(fetchEventById.pending, (state, action) => {
+        if (action.meta.arg !== state.event?.id) {
+          state.event = null;
+        }
         state.status = "pending";
       })
       .addCase(fetchEventById.fulfilled, (state, action) => {

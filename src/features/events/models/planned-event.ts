@@ -5,7 +5,7 @@ export type PlannedEvent = {
   title: string;
   eventDateTime: Date;
   description: string;
-  image: string;
+  imageUrl: string;
   eventType: PlannedEventType;
   contactPhone: string;
   contactEmail: string;

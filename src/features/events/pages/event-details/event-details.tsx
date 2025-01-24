@@ -17,10 +17,10 @@ export function EventsDetailsPage({ eventId }: EventsDetailsPageProps) {
   const plannedEvent = useAppSelector(selectEventDetails);
 
   useEffect(() => {
-    if (eventId === undefined) return;
+    if (eventId === undefined || plannedEvent?.id === eventId) return;
 
     dispatch(fetchEventById(eventId));
-  }, [eventId]);
+  }, [eventId, plannedEvent]);
 
   if (!plannedEvent) {
     return <LoadingIndicator />;

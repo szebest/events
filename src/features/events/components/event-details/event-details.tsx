@@ -13,7 +13,7 @@ export function EventsDetails({ plannedEvent }: EventsDetailsProps) {
     <Grid2 container>
       <Grid2 size={{ sm: 12, md: 4 }}>
         <Box className={styles.imgContainer}>
-          <img src={plannedEvent?.image} />
+          <img src={plannedEvent?.imageUrl} />
         </Box>
       </Grid2>
       <Grid2 size={{ sm: 12, md: 8 }}>

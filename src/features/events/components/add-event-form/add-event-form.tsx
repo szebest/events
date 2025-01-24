@@ -15,16 +15,26 @@ import { DesktopDateTimePicker } from "@mui/x-date-pickers/DesktopDateTimePicker
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 
-import styles from "./add-event-form.module.scss";
+import { AddPlannedEventRequest, UploadedImage } from "../../models";
 
-export function AddEventForm() {
+import styles from "./add-event-form.module.scss";
+import { eventFormToAddEventRequestMapper } from "../../mappers";
+import { EVENT_TYPES } from "../../mock";
+
+export type AddEventFormProps = {
+  onSubmit?: (_: AddPlannedEventRequest) => void;
+  loading: boolean;
+  error: string | null;
+};
+
+export function AddEventForm({ onSubmit, loading, error }: AddEventFormProps) {
   const formik = useFormik({
     initialValues: {
       title: "",
       eventDateTime: new Date(),
       description: "",
-      image: null as { file: File; url: string } | null,
-      eventType: "",
+      image: null as UploadedImage,
+      eventTypeId: null as number | null,
       contactPhone: "",
       contactEmail: "",
       eventLocation: "",
@@ -34,8 +44,8 @@ export function AddEventForm() {
       title: Yup.string().required("Event title is required"),
       eventDateTime: Yup.date().required("Date and time are required"),
       description: Yup.string().required("Description is required"),
-      image: Yup.string().required("Image is required"),
-      eventType: Yup.string().required("The type of event is required"),
+      image: Yup.mixed().required("Image is required"),
+      eventTypeId: Yup.number().required("The type of event is required"),
       contactPhone: Yup.string()
         .matches(/^\+?[0-9]{9,15}$/, "Incorrect phone number")
         .required("A telephone number is required"),
@@ -45,7 +55,9 @@ export function AddEventForm() {
       eventLocation: Yup.string().required("Venue is required"),
     }),
     onSubmit: (values) => {
-      // TODO: submit
+      const mapped = eventFormToAddEventRequestMapper(values);
+
+      onSubmit?.(mapped);
     },
   });
 
@@ -92,7 +104,6 @@ export function AddEventForm() {
               value={formik.values.eventDateTime}
               onChange={(value) => formik.setFieldValue("eventDateTime", value)}
               minDate={new Date()}
-              minTime={new Date()}
               closeOnSelect={false}
               slotProps={{
                 textField: {
@@ -159,19 +170,24 @@ export function AddEventForm() {
               <TextField
                 select
                 label="Type of event"
-                id="eventType"
-                name="eventType"
-                value={formik.values.eventType}
+                id="eventTypeId"
+                name="eventTypeId"
+                value={formik.values.eventTypeId}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 error={
-                  formik.touched.eventType && Boolean(formik.errors.eventType)
+                  formik.touched.eventTypeId &&
+                  Boolean(formik.errors.eventTypeId)
                 }
-                helperText={formik.touched.eventType && formik.errors.eventType}
+                helperText={
+                  formik.touched.eventTypeId && formik.errors.eventTypeId
+                }
               >
-                <MenuItem value="Sport">Sport</MenuItem>
-                <MenuItem value="Kultura">Kultura</MenuItem>
-                <MenuItem value="Zdrowie">Zdrowie</MenuItem>
+                {EVENT_TYPES.map((eventType) => (
+                  <MenuItem key={eventType.id} value={eventType.id}>
+                    {eventType.name}
+                  </MenuItem>
+                ))}
               </TextField>
             </FormControl>
           </Grid2>
@@ -234,24 +250,31 @@ export function AddEventForm() {
           </Grid2>
 
           <Grid2 size={12}>
-            <Box display="flex" justifyContent="end" gap={2}>
-              <Button
-                color="primary"
-                variant="outlined"
-                type="reset"
-                onClick={handleResetForm}
-              >
-                Clear form
-              </Button>
-              <Button
-                color="primary"
-                variant="contained"
-                type="submit"
-                disabled={!formik.isValid}
-              >
-                Save event
-              </Button>
-            </Box>
+            <Stack spacing={1}>
+              <Box display="flex" justifyContent="end" gap={2}>
+                <Button
+                  color="primary"
+                  variant="outlined"
+                  type="reset"
+                  onClick={handleResetForm}
+                >
+                  Clear form
+                </Button>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  type="submit"
+                  disabled={!formik.isValid || loading}
+                >
+                  Save event
+                </Button>
+              </Box>
+              {error && (
+                <Box display="flex" justifyContent="end">
+                  {error}
+                </Box>
+              )}
+            </Stack>
           </Grid2>
         </Grid2>
       </form>

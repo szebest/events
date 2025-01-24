@@ -1,0 +1,15 @@
+import { AddPlannedEventRequest, PlannedEventFormModel } from "../models";
+
+export function eventFormToAddEventRequestMapper(
+  input: PlannedEventFormModel
+): AddPlannedEventRequest {
+  if (!input.image || input.eventTypeId === null) throw new Error();
+
+  const {
+    image: { url: imageUrl },
+    eventTypeId,
+    ...rest
+  } = input;
+
+  return { imageUrl, eventTypeId, ...rest };
+}
