@@ -1,12 +1,10 @@
+import { PlannedEvent } from "./planned-event";
 import { UploadedImage } from "./uploaded-image";
 
-export type PlannedEventFormModel = {
-  title: string;
-  eventDateTime: Date;
-  description: string;
+export type PlannedEventFormModel = Omit<
+  PlannedEvent,
+  "id" | "eventType" | "imageUrl"
+> & {
+  eventTypeId: number;
   image: UploadedImage;
-  eventTypeId: number | null;
-  contactPhone: string;
-  contactEmail: string;
-  eventLocation: string;
 };

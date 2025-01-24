@@ -3,7 +3,7 @@ import { PlannedEventType } from "./planned-event-types";
 export type PlannedEvent = {
   id: number;
   title: string;
-  eventDateTime: Date;
+  eventDateTime: string;
   description: string;
   imageUrl: string;
   eventType: PlannedEventType;
