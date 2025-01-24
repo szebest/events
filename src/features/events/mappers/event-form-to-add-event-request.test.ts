@@ -1,22 +1,14 @@
 import { describe, it, expect, beforeEach } from "vitest";
 
 import { eventFormToAddEventRequestMapper } from "./event-form-to-add-event-request";
+import { PlannedEventFormModel } from "../models";
 
 describe("eventFormToAddEventRequestMapper", () => {
-  let baseInput = {
-    image: { file: new File([], ""), url: "https://example.com/image.jpg" },
-    eventDateTime: new Date("2025-01-24T10:00:00.000Z"),
-    eventTypeId: 1,
-    title: "Sample Event",
-    description: "A description of the event",
-    contactPhone: "999999999",
-    contactEmail: "example@example.com",
-    eventLocation: "location",
-  };
+  let baseInput: PlannedEventFormModel;
 
   beforeEach(() => {
     baseInput = {
-      image: { file: new File([], ""), url: "https://example.com/image.jpg" },
+      image: { name: "", url: "https://example.com/image.jpg" },
       eventDateTime: new Date("2025-01-24T10:00:00.000Z"),
       eventTypeId: 1,
       title: "Sample Event",
