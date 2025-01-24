@@ -13,17 +13,19 @@ import {
 } from "@mui/material";
 import { DesktopDateTimePicker } from "@mui/x-date-pickers/DesktopDateTimePicker";
 
+import { eventFormToAddEventRequestMapper } from "../../mappers";
+import { EVENT_TYPES } from "../../mock";
 import { AddPlannedEventRequest, UploadedImage } from "../../models";
 
 import styles from "./add-event-form.module.scss";
-import { eventFormToAddEventRequestMapper } from "../../mappers";
-import { EVENT_TYPES } from "../../mock";
 
 export type AddEventFormProps = {
   onSubmit?: (_: AddPlannedEventRequest) => void;
   loading?: boolean;
   error?: string | null;
 };
+
+const ALLOWED_FILE_EXTENSIONS = [".png", ".jpg"];
 
 export function AddEventForm({ onSubmit, loading, error }: AddEventFormProps) {
   const formik = useFormik({
@@ -50,7 +52,7 @@ export function AddEventForm({ onSubmit, loading, error }: AddEventFormProps) {
       contactEmail: Yup.string()
         .email("Incorrect e-mail address")
         .required("An e-mail address is required"),
-      eventLocation: Yup.string().required("Venue is required"),
+      eventLocation: Yup.string().required("Event location is required"),
     }),
     onSubmit: (values) => {
       const mapped = eventFormToAddEventRequestMapper(values);
@@ -64,7 +66,20 @@ export function AddEventForm({ onSubmit, loading, error }: AddEventFormProps) {
   const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.currentTarget.files![0];
 
-    formik.setFieldValue("image", { file, url: URL.createObjectURL(file) });
+    const fileNameSplitted = file.name.toLowerCase().split(".");
+    const fileExtension = "." + fileNameSplitted[fileNameSplitted.length - 1];
+
+    const isAllowedFileExtension =
+      ALLOWED_FILE_EXTENSIONS.includes(fileExtension);
+
+    if (!isAllowedFileExtension) {
+      return;
+    }
+
+    formik.setFieldValue("image", {
+      url: URL.createObjectURL(file),
+      name: file.name,
+    });
   };
 
   const handleResetForm = () => {
@@ -134,19 +149,24 @@ export function AddEventForm({ onSubmit, loading, error }: AddEventFormProps) {
         <Grid2 size={12}>
           <Button variant="contained" component="label">
             Upload event image
-            <input type="file" hidden onChange={handleFileSelected} />
+            <input
+              type="file"
+              hidden
+              accept={ALLOWED_FILE_EXTENSIONS.join(",")}
+              onChange={handleFileSelected}
+            />
           </Button>
           {formik.values.image && (
             <Stack spacing={1}>
               <Typography pt={1}>
-                Uploaded image name: {formik.values.image.file.name}
+                Uploaded image name: {formik.values.image.name}
               </Typography>
               <Button
                 variant="contained"
                 onClick={togglePreviewImage}
                 sx={{ width: "max-content" }}
               >
-                {isPreviewVisible ? "Hide image" : "Show image"}
+                {isPreviewVisible ? "Hide image" : "Preview image"}
               </Button>
               {isPreviewVisible && (
                 <Box className={styles.imgContainer}>
@@ -263,7 +283,7 @@ export function AddEventForm({ onSubmit, loading, error }: AddEventFormProps) {
             </Box>
             {error && (
               <Box display="flex" justifyContent="end">
-                {error}
+                <Typography color="error">{error}</Typography>
               </Box>
             )}
           </Stack>

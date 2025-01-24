@@ -31,9 +31,7 @@ export function EventsDetails({ plannedEvent }: EventsDetailsProps) {
               <Typography variant="h6">{plannedEvent.eventLocation}</Typography>
             </Box>
             <Box>
-              <Typography variant="body1">
-                <Chip variant="outlined" label={plannedEvent.eventType.name} />
-              </Typography>
+              <Chip variant="outlined" label={plannedEvent.eventType.name} />
             </Box>
             <Box>
               <Typography variant="body1">

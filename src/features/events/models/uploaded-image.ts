@@ -1,4 +1,4 @@
 export type UploadedImage = {
-  file: File;
   url: string;
+  name: string;
 } | null;
