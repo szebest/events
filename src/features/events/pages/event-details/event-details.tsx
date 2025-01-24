@@ -8,7 +8,7 @@ import { fetchEventById, selectEventDetails } from "../../slices";
 import { EventsDetails } from "../../components";
 
 export type EventsDetailsPageProps = {
-  eventId: number;
+  eventId?: number;
 };
 
 export function EventsDetailsPage({ eventId }: EventsDetailsPageProps) {
@@ -17,6 +17,8 @@ export function EventsDetailsPage({ eventId }: EventsDetailsPageProps) {
   const plannedEvent = useAppSelector(selectEventDetails);
 
   useEffect(() => {
+    if (eventId === undefined) return;
+
     dispatch(fetchEventById(eventId));
   }, [eventId]);
 

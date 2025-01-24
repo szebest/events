@@ -13,7 +13,7 @@ export function EventsDetails({ plannedEvent }: EventsDetailsProps) {
     <Grid2 container>
       <Grid2 size={{ sm: 12, md: 4 }}>
         <Box className={styles.imgContainer}>
-          <img src={plannedEvent?.imageUrl} />
+          <img src={plannedEvent?.image} />
         </Box>
       </Grid2>
       <Grid2 size={{ sm: 12, md: 8 }}>
@@ -24,19 +24,21 @@ export function EventsDetails({ plannedEvent }: EventsDetailsProps) {
             </Box>
             <Box>
               <Typography variant="h6">
-                {plannedEvent?.date?.toString()}
+                {plannedEvent?.eventDateTime?.toString()}
               </Typography>
-              <Typography variant="h6">{plannedEvent?.location}</Typography>
+              <Typography variant="h6">
+                {plannedEvent?.eventLocation}
+              </Typography>
             </Box>
             <Box>
               <Typography variant="body1">
-                Type of event: {plannedEvent?.type?.name}
+                Type of event: {plannedEvent?.eventType?.name}
               </Typography>
               <Typography variant="body1">
-                Organizer's phone number: {plannedEvent?.phoneNumber}
+                Organizer's phone number: {plannedEvent?.contactPhone}
               </Typography>
               <Typography variant="body1">
-                Organizer's email: {plannedEvent?.email}
+                Organizer's email: {plannedEvent?.contactEmail}
               </Typography>
             </Box>
           </Stack>

@@ -21,6 +21,12 @@ const EventsDetailsPage = lazy(() =>
   }))
 );
 
+const AddEventPage = lazy(() =>
+  import("@/features/events").then((module) => ({
+    default: module.AddEventPage,
+  }))
+);
+
 export function App() {
   return (
     <Provider store={store}>
@@ -36,7 +42,7 @@ export function App() {
                 </NumberParamContainer>
               }
             ></Route>
-            <Route path="add" element={<div>add</div>}></Route>
+            <Route path="add" element={<AddEventPage />}></Route>
           </Route>
 
           <Route path="*" element={<Navigate to="/events"></Navigate>}></Route>

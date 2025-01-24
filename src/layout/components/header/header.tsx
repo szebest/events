@@ -1,13 +1,14 @@
 import { AppBar, Link, Toolbar, Typography } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+
+import { LinkBehavior } from "@/shared/components";
 
 export function Header() {
   return (
     <AppBar position="static">
       <Toolbar>
         <Link
-          component={RouterLink}
-          to="/events"
+          component={LinkBehavior}
+          href="/events"
           underline="none"
           color="white"
         >

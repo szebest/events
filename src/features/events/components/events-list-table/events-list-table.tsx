@@ -8,7 +8,8 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+
+import { LinkBehavior } from "@/shared/components";
 
 import { PlannedEvent } from "../../models";
 
@@ -40,13 +41,13 @@ export function EventsListTable({ plannedEvents }: EventsListTableProps) {
             >
               <TableCell>{plannedEvent.title}</TableCell>
               <TableCell align="right">
-                {plannedEvent.date.toString()}
+                {plannedEvent.eventDateTime.toString()}
               </TableCell>
-              <TableCell align="right">{plannedEvent.type.name}</TableCell>
+              <TableCell align="right">{plannedEvent.eventType.name}</TableCell>
               <TableCell align="center">
                 <Link
-                  component={RouterLink}
-                  to={`/events/${plannedEvent.id}`}
+                  component={LinkBehavior}
+                  href={`/events/${plannedEvent.id}`}
                   underline="none"
                 >
                   Details

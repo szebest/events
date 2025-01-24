@@ -3,11 +3,11 @@ import { PlannedEventType } from "./planned-event-types";
 export type PlannedEvent = {
   id: number;
   title: string;
-  date: Date;
+  eventDateTime: Date;
   description: string;
-  imageUrl: string;
-  type: PlannedEventType;
-  phoneNumber: string;
-  email: string;
-  location: string;
+  image: string;
+  eventType: PlannedEventType;
+  contactPhone: string;
+  contactEmail: string;
+  eventLocation: string;
 };
