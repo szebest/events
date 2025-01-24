@@ -1,6 +1,7 @@
 # Planned Events Application
 
 This project is designed to display planned events, allowing users to view upcoming events and add new ones. Events include details such as title, date and time, description, image, type, contact information, and location.
+This project is just for demo purpose, because the API requests are mocked, so the application does not persist the data after a page refresh.
 
 ## Scripts
 
@@ -93,8 +94,4 @@ To add a new event, use the provided form in the application interface. Fill in 
 - **Event Location**: The location where the event will take place.
 
 Once submitted, the new event will appear in the list of planned events.
-
----
-
-For further assistance or to report issues, please contact the project maintainers.
 
