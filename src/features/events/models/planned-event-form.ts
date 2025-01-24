@@ -3,8 +3,9 @@ import { UploadedImage } from "./uploaded-image";
 
 export type PlannedEventFormModel = Omit<
   PlannedEvent,
-  "id" | "eventType" | "imageUrl"
+  "id" | "eventType" | "imageUrl" | "eventDateTime"
 > & {
-  eventTypeId: number;
+  eventTypeId: number | null;
   image: UploadedImage;
+  eventDateTime: Date;
 };

@@ -7,9 +7,15 @@ export function eventFormToAddEventRequestMapper(
 
   const {
     image: { url: imageUrl },
+    eventDateTime,
     eventTypeId,
     ...rest
   } = input;
 
-  return { imageUrl, eventTypeId, ...rest };
+  return {
+    imageUrl,
+    eventTypeId,
+    eventDateTime: eventDateTime.toString(),
+    ...rest,
+  };
 }
