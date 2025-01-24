@@ -22,11 +22,7 @@ export function EventsListPage() {
   return (
     <Stack spacing={2}>
       <Box display="flex" justifyContent="end">
-        <Button
-          LinkComponent={LinkBehavior}
-          href="/events/add"
-          variant="contained"
-        >
+        <Button LinkComponent={LinkBehavior} href="/add" variant="contained">
           Add event
         </Button>
       </Box>

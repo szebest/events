@@ -73,7 +73,7 @@ export function EventsListTable({
               <TableCell align="center">
                 <Link
                   component={LinkBehavior}
-                  href={`/events/${plannedEvent.id}`}
+                  href={`/${plannedEvent.id}`}
                   underline="none"
                 >
                   Details
