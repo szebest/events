@@ -7,19 +7,26 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
 
-import { LinkBehavior } from "@/shared/components";
+import { LinkBehavior, LoadingIndicator } from "@/shared/components";
+import { appFormatDate } from "@/shared/utils";
+import { RequestStatus } from "@/shared/models";
 
 import { PlannedEvent } from "../../models";
 
 export type EventsListTableProps = {
   plannedEvents: PlannedEvent[];
+  status: RequestStatus;
 };
 
-export function EventsListTable({ plannedEvents }: EventsListTableProps) {
+export function EventsListTable({
+  plannedEvents,
+  status,
+}: EventsListTableProps) {
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} elevation={4}>
       <Table aria-label="planned events table">
         <TableHead>
           <TableRow>
@@ -34,6 +41,22 @@ export function EventsListTable({ plannedEvents }: EventsListTableProps) {
           </TableRow>
         </TableHead>
         <TableBody>
+          {status === "pending" && (
+            <TableRow>
+              <TableCell colSpan={4}>
+                <LoadingIndicator />
+              </TableCell>
+            </TableRow>
+          )}
+          {status === "failed" && (
+            <TableRow>
+              <TableCell colSpan={4}>
+                <Typography color="error">
+                  An unknown error has occurred
+                </Typography>
+              </TableCell>
+            </TableRow>
+          )}
           {plannedEvents.map((plannedEvent) => (
             <TableRow
               key={plannedEvent.id}
@@ -41,7 +64,7 @@ export function EventsListTable({ plannedEvents }: EventsListTableProps) {
             >
               <TableCell>{plannedEvent.title}</TableCell>
               <TableCell align="right">
-                {plannedEvent.eventDateTime.toString()}
+                {appFormatDate(plannedEvent.eventDateTime)}
               </TableCell>
               <TableCell align="right">{plannedEvent.eventType.name}</TableCell>
               <TableCell align="center">

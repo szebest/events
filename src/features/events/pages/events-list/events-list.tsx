@@ -30,7 +30,7 @@ export function EventsListPage() {
           Add event
         </Button>
       </Box>
-      <EventsListTable plannedEvents={plannedEvents} />
+      <EventsListTable plannedEvents={plannedEvents} status={eventsStatus} />
     </Stack>
   );
 }

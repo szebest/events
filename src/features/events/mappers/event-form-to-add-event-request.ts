@@ -15,7 +15,7 @@ export function eventFormToAddEventRequestMapper(
   return {
     imageUrl,
     eventTypeId,
-    eventDateTime: eventDateTime.toString(),
+    eventDateTime: eventDateTime.toISOString(),
     ...rest,
   };
 }

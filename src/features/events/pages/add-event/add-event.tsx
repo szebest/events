@@ -24,8 +24,9 @@ export function AddEventPage() {
 
       setError(null);
 
-      navigate(`/events/${(response.payload as PlannedEvent).id}`);
+      //navigate(`/events/${(response.payload as PlannedEvent).id}`);
     } catch (e) {
+      console.log(e);
       setError("Unknown error");
     } finally {
       setLoading(false);

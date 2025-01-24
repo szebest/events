@@ -1,5 +1,7 @@
 import { Box, Grid2, Stack, Typography } from "@mui/material";
 
+import { appFormatDate } from "@/shared/utils";
+
 import { PlannedEvent } from "../../models";
 
 import styles from "./event-details.module.scss";
@@ -24,7 +26,7 @@ export function EventsDetails({ plannedEvent }: EventsDetailsProps) {
             </Box>
             <Box>
               <Typography variant="h6">
-                {plannedEvent?.eventDateTime?.toString()}
+                {appFormatDate(plannedEvent.eventDateTime)}
               </Typography>
               <Typography variant="h6">
                 {plannedEvent?.eventLocation}

@@ -76,11 +76,12 @@ const eventsSlice = createSlice({
       .addCase(addEvent.fulfilled, (state, action) => {
         // If data has been loaded, then add it to the redux store
         if (state.status === "succeeded") {
-          state.events.push(action.payload);
+          state.events = [...state.events, action.payload];
         }
-        // Always update the planned events array
-        // It acts like an database
-        PLANNED_EVENTS.push(action.payload);
+        // Otherwise update the planned events array, so that when the list loads, the updated data will be loaded
+        else {
+          PLANNED_EVENTS.push(action.payload);
+        }
       });
   },
 });
