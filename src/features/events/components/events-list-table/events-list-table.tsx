@@ -1,4 +1,5 @@
 import {
+  Chip,
   Link,
   Paper,
   Table,
@@ -66,7 +67,9 @@ export function EventsListTable({
               <TableCell align="right">
                 {appFormatDate(plannedEvent.eventDateTime)}
               </TableCell>
-              <TableCell align="right">{plannedEvent.eventType.name}</TableCell>
+              <TableCell align="right">
+                <Chip variant="outlined" label={plannedEvent.eventType.name} />
+              </TableCell>
               <TableCell align="center">
                 <Link
                   component={LinkBehavior}

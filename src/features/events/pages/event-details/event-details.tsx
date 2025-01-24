@@ -1,10 +1,14 @@
 import { useEffect } from "react";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { LoadingIndicator } from "@/shared/components";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks";
 
-import { fetchEventById, selectEventDetails } from "../../slices";
+import {
+  fetchEventById,
+  selectEventDetails,
+  selectEventDetailsStatus,
+} from "../../slices";
 import { EventsDetails } from "../../components";
 
 export type EventsDetailsPageProps = {
@@ -15,6 +19,7 @@ export function EventsDetailsPage({ eventId }: EventsDetailsPageProps) {
   const dispatch = useAppDispatch();
 
   const plannedEvent = useAppSelector(selectEventDetails);
+  const plannedEventStatus = useAppSelector(selectEventDetailsStatus);
 
   useEffect(() => {
     if (eventId === undefined || plannedEvent?.id === eventId) return;
@@ -24,6 +29,10 @@ export function EventsDetailsPage({ eventId }: EventsDetailsPageProps) {
 
   if (!plannedEvent) {
     return <LoadingIndicator />;
+  }
+
+  if (plannedEventStatus === "failed") {
+    return <Typography color="error">An unknown error has occurred</Typography>;
   }
 
   return (
