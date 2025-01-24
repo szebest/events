@@ -3,6 +3,8 @@
 This project is designed to display planned events, allowing users to view upcoming events and add new ones. Events include details such as title, date and time, description, image, type, contact information, and location.
 This project is just for demo purpose, because the API requests are mocked, so the application does not persist the data after a page refresh.
 
+![image](https://github.com/user-attachments/assets/24c1d0ac-99e9-44c0-aafa-fc9cec9b1189)
+
 ## Scripts
 
 The application includes the following scripts for development, building, testing, and linting:
